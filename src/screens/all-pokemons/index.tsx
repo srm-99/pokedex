@@ -3,17 +3,15 @@ import React, { useState } from "react";
 // Components
 import { PokemonsContainer } from "./Pokemons-container";
 
-// Types
-import { pokemonType, responseApiType } from "./types";
-
-// Utils
-import { client } from "../../utils";
-
 // Images
 import logo from "../../img/logo.png";
 import magnifier from "../../img/magnifier.svg";
 
 export const AllPokemons = () => {
+    // States variables
+    const [offset, setOffset] = useState<number>(0);
+    const [limit, setLimit] = useState<number>(10);
+
     return (
         <>
             <header>
@@ -76,7 +74,7 @@ export const AllPokemons = () => {
                         </select>
                     </div>
                 </div>
-                <PokemonsContainer />
+                <PokemonsContainer offset={offset} limit={limit} />
                 <div className="pagination" id="pagination">
                     <button id="previous-button">&laquo;</button>
                     <button id="next-button">&raquo;</button>
