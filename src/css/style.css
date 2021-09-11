@@ -114,6 +114,8 @@ select:hover {
     grid-template-columns: 1fr;
 }
 .card--grid {
+    text-decoration: none;
+    color: rgb(51, 51, 51);
     display: grid;
     position: relative;
     border-radius: 10px;
@@ -126,6 +128,11 @@ select:hover {
 .card--grid:hover {
     animation: up-down 0.8s 1;
 }
+.pokemon-count {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
 @keyframes up-down {
     0% {
         transform: translateY(0);
@@ -137,11 +144,7 @@ select:hover {
         transform: translateY(0px);
     }
 }
-.card--grid a {
-    text-decoration: none;
-    color: black;
-    display: grid;
-}
+
 .card--grid img {
     justify-self: center;
     max-height: 150px;
@@ -195,14 +198,6 @@ select:hover {
     50% {
         transform: rotate(540deg);
     }
-}
-#pokemons-length {
-    height: 30px;
-    border: 1px solid rgb(49, 49, 49);
-    border-radius: 10px;
-    padding: 5px 10px;
-    text-align: center;
-    color: rgb(49, 49, 49);
 }
 .pagination {
     display: grid;
@@ -312,6 +307,7 @@ select:hover {
     border-radius: 0.5em 0.5em 0 0;
 }
 .stats--pokemon {
+    display: grid;
     margin: 0 auto;
     display: grid;
     gap: 0.5em;
@@ -332,7 +328,6 @@ select:hover {
     writing-mode: vertical-lr;
     margin: 0 3px 0 0;
 }
-
 #stat-value {
     position: absolute;
     top: -20px;
@@ -341,7 +336,6 @@ select:hover {
     writing-mode: horizontal-tb;
     font-weight: 600;
 }
-
 @media (min-width: 500px) {
     .pokemon--container--grid {
         grid-template-columns: repeat(2, 1fr);

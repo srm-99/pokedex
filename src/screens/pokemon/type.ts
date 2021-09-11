@@ -1,17 +1,14 @@
+export type pokemonUseParamsType = {
+    idPokemon: string;
+};
 export type pokemonType = {
     id: number;
     name: string;
     urlImg: string;
-};
-type resultApiType = {
-    name: string;
-    url: string;
-};
-export type responseApiOffsetLimitType = {
-    count: number;
-    next: string | null;
-    previous: string | null;
-    results: resultApiType[];
+    height: number;
+    weight: number;
+    stats: any[];
+    maxStat: number;
 };
 export type responseApiIdNameType = {
     abilities: any[];
@@ -33,6 +30,11 @@ export type responseApiIdNameType = {
     types: any[];
     weight: number;
 };
-export type propsPokemonContainerType = {
-    pokemons: pokemonType[];
+export type abbreviationsType = {
+    hp: string;
+    attack: string;
+    defense: string;
+    "special-attack": string;
+    "special-defense": string;
+    speed: string;
 };

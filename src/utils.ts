@@ -1,3 +1,22 @@
+export const URL_POKEAPI: string = "https://pokeapi.co/api/v2/pokemon/";
+export const MAX_POKEMONS: number = 898;
+
+export const debounce = (callback: Function, delay: number = 300) => {
+    let timeout: ReturnType<typeof setTimeout>;
+    return (...args: any) => {
+        if (timeout) clearTimeout(timeout);
+        timeout = setTimeout(() => callback(...args), delay);
+    };
+};
+
+// export const debounce = (callback: Function, delay: number = 300) => {
+//     let timeout: ReturnType<typeof setTimeout>;
+//     return (...args: any) => {
+//         if (timeout) clearTimeout(timeout);
+//         timeout = setTimeout(() => callback(...args), delay);
+//     };
+// };
+
 export const getIdFromUrl = (url: string): number => {
     const stringId = url
         .substring(0, url.length - 1)
@@ -19,8 +38,9 @@ export const createImageUrl = (id: number | null): string => {
     if (!id) {
         id = 0;
     }
-    convertIdToString(id);
-    return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`;
+    return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${convertIdToString(
+        id
+    )}.png`;
 };
 
 export const client = (url: string, params: object = {}) =>
