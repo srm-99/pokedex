@@ -1,19 +1,16 @@
-export type pokemonType = {
+export type PokemonUseParamsType = {
+    idPokemon: string;
+};
+export type PokemonType = {
     id: number;
     name: string;
     urlImg: string;
+    height: number;
+    weight: number;
+    stats: any[];
+    maxStat: number;
 };
-type resultApiType = {
-    name: string;
-    url: string;
-};
-export type responseApiOffsetLimitType = {
-    count: number;
-    next: string | null;
-    previous: string | null;
-    results: resultApiType[];
-};
-export type responseApiIdNameType = {
+export type ResponseApiIdNameType = {
     abilities: any[];
     base_experience: number;
     forms: any[];
@@ -32,7 +29,4 @@ export type responseApiIdNameType = {
     stats: any[];
     types: any[];
     weight: number;
-};
-export type propsPokemonContainerType = {
-    pokemons: pokemonType[];
 };

@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
+// Utils
+import { getImagePokemonUrl } from "../../utils/url";
+import { api } from "../../utils/api";
+import { URL_POKEAPI, MAX_POKEMONS } from "../../utils/constants";
+
 // Types
 import {
-    pokemonUseParamsType,
-    responseApiIdNameType,
-    pokemonType,
-    abbreviationsType,
+    PokemonUseParamsType,
+    ResponseApiIdNameType,
+    PokemonType,
 } from "./type";
 
-// Utils - - - - - - - - - - - - - - - - - - - - - - - - -
-import { client, createImageUrl, URL_POKEAPI, MAX_POKEMONS } from "../../utils";
-
-export const Pokemon = () => {
+const Pokemon = () => {
     // Constants
-    const { idPokemon }: pokemonUseParamsType = useParams();
-    const [pokemon, setPokemon] = useState<pokemonType>({
+    const { idPokemon }: PokemonUseParamsType = useParams();
+    const [pokemon, setPokemon] = useState<PokemonType>({
         id: 0,
         name: "",
         urlImg: "",
@@ -29,11 +30,11 @@ export const Pokemon = () => {
     const searchPokemon = async (id: string) => {
         try {
             const url = URL_POKEAPI + id;
-            const response: responseApiIdNameType = await client(url);
-            const searchPokemon: pokemonType = {
+            const response = await api<ResponseApiIdNameType>(url);
+            const searchPokemon: PokemonType = {
                 id: response.id,
                 name: response.name,
-                urlImg: createImageUrl(response.id),
+                urlImg: getImagePokemonUrl(response.id),
                 height: response.height,
                 weight: response.weight,
                 stats: response.stats,
@@ -49,6 +50,7 @@ export const Pokemon = () => {
     //  abbreviations
     const abbreviateWords = (sentence: string): string => {
         const rawWords = sentence.split("-");
+        //sentence.replace(/special/i, "sp")
         if (rawWords[0] === "special") {
             rawWords[0] = "sp";
             return rawWords.join("-");
@@ -60,6 +62,7 @@ export const Pokemon = () => {
     useEffect(() => {
         searchPokemon(idPokemon);
     }, [idPokemon]);
+
     return (
         <>
             <div className="select-bar">
@@ -155,3 +158,5 @@ export const Pokemon = () => {
         </>
     );
 };
+
+export default Pokemon;

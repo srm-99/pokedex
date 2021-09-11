@@ -2,25 +2,14 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 // Components
-import { AllPokemons } from "./screens/all-pokemons/index";
-import { Pokemon } from "./screens/pokemon/index";
-
-//  Images - - - - - - - - - - - - - - - - - - - -
-import logo from "./img/logo.png";
+import AllPokemons from "./screens/Pokemons/index";
+import Pokemon from "./screens/Pokemon/index";
+import Header from "./templates/Header";
 
 function App() {
     return (
         <Router>
-            <header>
-                <Link to="/">
-                    <img
-                        src={logo}
-                        alt="logo Pokedex"
-                        className="header-logo"
-                    />
-                    <h1>PokéDex</h1>
-                </Link>
-            </header>
+            <Header />
             <Switch>
                 <Route path="/:idPokemon">
                     <Pokemon />

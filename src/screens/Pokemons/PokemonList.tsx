@@ -1,11 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
-// Types - - - - - - - - - - - - - - - - - - - - - - - - -
-import { propsPokemonContainerType } from "../types";
+// Types
+import { PokemonListPropsType } from "./types";
 
-export const PokemonsContainer = ({ pokemons }: propsPokemonContainerType) => {
-    if (pokemons.length && pokemons[0].id) {
+const PokemonsList: FC<PokemonListPropsType> = ({ pokemons }) => {
+    if (pokemons.length) {
         return (
             <div className="pokemon--container--grid">
                 {pokemons.map(({ name, id, urlImg }) => (
@@ -26,13 +26,14 @@ export const PokemonsContainer = ({ pokemons }: propsPokemonContainerType) => {
                 ))}
             </div>
         );
-    } else {
-        return (
-            <div className="without--pokemons">
-                <h1>😢</h1>
-                <h2>Sorry!</h2>
-                <p>the pokemon has not been found.</p>
-            </div>
-        );
     }
+    return (
+        <div className="without--pokemons">
+            <h1>😢</h1>
+            <h2>Sorry!</h2>
+            <p>the pokemon has not been found.</p>
+        </div>
+    );
 };
+
+export default PokemonsList;
