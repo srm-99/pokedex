@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 
 // Utils
 import { getPokemonsApiUrl } from "./utils/getPokemonsApiUrl";
-import sortFilter from "./utils/sort";
 import { api } from "../../../utils/api";
+import sortFilter from "./utils/sort";
 import * as urlUtils from "../../../utils/url";
+import { isSearchQuery } from "./utils/isSearchQuery";
 
 // Types
 import {
@@ -14,12 +15,6 @@ import {
     PokemonsAPIRestType,
     PokemonsAPIResByQueryType,
 } from "../types";
-
-// Sacar en Utils 894894984489498894
-const isSearchQuery = (
-    response: PokemonsAPIRestType | PokemonsAPIResByQueryType,
-    search: string
-): response is PokemonsAPIResByQueryType => !!search;
 
 const usePokemons = ({ toolbar }: UsePokemonsPropsType) => {
     const [pokemons, setPokemons] = useState<PokemonStateType>([]);
@@ -38,8 +33,8 @@ const usePokemons = ({ toolbar }: UsePokemonsPropsType) => {
         });
         api<PokemonsAPIRestType | PokemonsAPIResByQueryType>(pokemonUrl)
             .then((response) => {
-                console.log({ response });
                 if (!mounted) return;
+
                 if (isSearchQuery(response, toolbar.search)) {
                     if (response) {
                         setPokemons([
@@ -72,11 +67,19 @@ const usePokemons = ({ toolbar }: UsePokemonsPropsType) => {
             .catch((error) => {
                 console.log({ error });
                 setPokemons([]);
-                !toolbar.search &&
+                if (!toolbar.search) {
                     setMeta({
-                        error: error.message || "Error obteniendo los pokemons",
+                        error:
+                            error.message ||
+                            "an error occurred getting the pokemons",
                         status: "loaded",
                     });
+                } else {
+                    setMeta({
+                        error: "Pokemon not found",
+                        status: "loaded",
+                    });
+                }
             });
         return () => {
             mounted = false;

@@ -14,7 +14,6 @@ const ToolBar: FC<ToolbarPropsType> = ({ toolbar, onChange }) => {
                     name="limit-pokemons"
                     id="limit-pokemons"
                     value={toolbar.limit}
-                    defaultValue={toolbar.limit}
                     onChange={(event) => {
                         onChange("limit", +event.target.value);
                     }}
@@ -28,7 +27,6 @@ const ToolBar: FC<ToolbarPropsType> = ({ toolbar, onChange }) => {
                     name="sort-pokemons"
                     id="sort-pokemons"
                     value={toolbar.sort}
-                    defaultValue={toolbar.sort}
                     onChange={(event) =>
                         onChange(
                             "sort",

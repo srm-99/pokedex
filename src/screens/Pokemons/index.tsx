@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React from "react";
 
 //  Components
 import PokemonsList from "./PokemonList";
@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import ToolBar from "./ToolBar";
 import Count from "./Count";
 import Pagination from "./Pagination";
+import Loading from "../../components/Loading";
 
 // Hooks
 import usePokemons from "./hooks/usePokemons";
@@ -17,10 +18,13 @@ const Pokemons = () => {
         toolbar: toolbar.data,
     });
 
+    if (pokemons.meta.status === "loading") {
+        return <Loading></Loading>;
+    }
     return (
         <>
             <SearchBar toolbar={toolbar.data} onChange={toolbar.onChange} />
-            <main className="container">
+            <div className="container">
                 <ToolBar toolbar={toolbar.data} onChange={toolbar.onChange} />
                 <Count count={pokemons.data.length} />
                 <PokemonsList pokemons={pokemons.data} />
@@ -28,7 +32,7 @@ const Pokemons = () => {
                     toolbar={toolbar.data}
                     onChange={toolbar.onChange}
                 />
-            </main>
+            </div>
         </>
     );
 };

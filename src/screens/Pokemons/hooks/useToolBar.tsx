@@ -8,7 +8,7 @@ const useToolBar = () => {
         search: "",
         limit: 10,
         offset: 0,
-        sort: "ascByName",
+        sort: "ascById",
     });
 
     const onChange = <T extends keyof ToolbarStateType>(

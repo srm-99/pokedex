@@ -11,7 +11,7 @@ const PokemonsList: FC<PokemonListPropsType> = ({ pokemons }) => {
                 {pokemons.map(({ name, id, urlImg }) => (
                     <Link
                         key={id}
-                        to={`/${id}`}
+                        to={`/pokemon/${id}`}
                         style={{ textDecoration: "none" }}
                     >
                         <div className="card--grid">
